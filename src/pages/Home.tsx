@@ -39,12 +39,8 @@ const Home = () => {
         <div className="container">
           <div className="about-grid">
 
-            {/* Left — thumbnails + video */}
+            {/* Left — video */}
             <div className="about-media">
-              <div className="about-thumbnails">
-                <div className="about-thumb" />
-                <div className="about-thumb" />
-              </div>
               <div className="about-video-box">
                 <div className="about-video-play">&#9654;</div>
                 <div>
@@ -60,21 +56,30 @@ const Home = () => {
               <p className="about-tagline">Technology that fits your world — not the other way around.</p>
               <p className="about-description">
                 At OORAH Tech, we're built on one simple belief: great technology should feel invisible.
-                We design tools that integrate directly into your existing ecosystem so you can focus
-                on your business, not your software.
+                We design and build tools that slip quietly into your existing workflows — no costly
+                overhauls, no steep learning curves, and no need to rip out what already works.
+                From emerging startups to global enterprises, we partner across verticals to solve
+                real problems with focused, elegant solutions.
+              </p>
+              <p className="about-description">
+                Innovation at OORAH isn't a buzzword — it's a discipline. Every product we ship is
+                the result of deep listening, rigorous thinking, and an obsession with outcomes that
+                actually move the needle for your business. We don't chase trends. We build with
+                intention, and we ship with conviction.
               </p>
               <ul className="about-list">
                 <li>
-                  <strong>Frictionless Integration</strong> — No costly overhauls or steep learning curves.
-                  Our solutions plug right into what you already use.
+                  <strong>Frictionless Integration</strong> — Our solutions plug directly into what
+                  you already use. No disruption, no downtime, no compromise.
                 </li>
                 <li>
-                  <strong>Disciplined Innovation</strong> — Every product we ship comes from deep listening
-                  and an obsession with your actual business outcomes.
+                  <strong>Disciplined Innovation</strong> — Every product we ship comes from deep
+                  listening and an obsession with your actual business outcomes, not industry buzzwords.
                 </li>
                 <li>
-                  <strong>Quiet Reliability</strong> — We bring the clarity and craft to make it happen
-                  without the noise.
+                  <strong>Quiet Reliability</strong> — Whether you're navigating a volatile market or
+                  laying the groundwork for the next decade, we bring the clarity and craft to make
+                  it happen — without the noise.
                 </li>
               </ul>
             </div>

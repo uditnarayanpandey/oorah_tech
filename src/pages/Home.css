@@ -109,19 +109,6 @@
   font-weight: 700;
 }
 
-.about-thumbnails {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.about-thumb {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 16px;
-  background: #f0f0f0;
-  border: 1px solid #e8e8e8;
-}
 
 /* Video box */
 .about-video-box {
