@@ -73,7 +73,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  max-width: 520px;
+  max-width: unset;
 }
 
 .about-heading {
