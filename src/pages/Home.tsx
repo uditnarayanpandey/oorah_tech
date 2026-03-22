@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Button, HeroCarousel } from '@components'
 import { HERO_SLIDES, HOME_FEATURES } from '@/data/home'
-import teamImage from '@assets/images/team-image-home-page.svg'
 import './Home.css'
 
 const Home = () => {
@@ -40,7 +39,22 @@ const Home = () => {
         <div className="container">
           <div className="about-grid">
 
-            {/* Left — text */}
+            {/* Left — thumbnails + video */}
+            <div className="about-media">
+              <div className="about-thumbnails">
+                <div className="about-thumb" />
+                <div className="about-thumb" />
+              </div>
+              <div className="about-video-box">
+                <div className="about-video-play">&#9654;</div>
+                <div>
+                  <p className="about-video-label">Watch Our Story</p>
+                  <p className="about-video-sub">Coming soon</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right — text */}
             <div className="about-text">
               <h2 className="about-heading">Who We Are</h2>
               <p className="about-tagline">Technology that fits your world — not the other way around.</p>
@@ -63,22 +77,6 @@ const Home = () => {
                   without the noise.
                 </li>
               </ul>
-              <div className="about-thumbnails">
-                <div className="about-thumb" />
-                <div className="about-thumb" />
-                <div className="about-video-box">
-                  <div className="about-video-play">&#9654;</div>
-                  <div>
-                    <p className="about-video-label">Watch Our Story</p>
-                    <p className="about-video-sub">Coming soon</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right — photo card */}
-            <div className="about-photo-card">
-              <img src={teamImage} alt="OORAH Team" className="about-photo-img" />
             </div>
 
           </div>
