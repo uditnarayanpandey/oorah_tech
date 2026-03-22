@@ -1,0 +1,72 @@
+.team-member-hero {
+  background-color: var(--color-gray-50);
+  padding: var(--spacing-3xl) 0;
+}
+
+.team-member-layout {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: var(--spacing-2xl);
+  align-items: center;
+}
+
+.team-member-avatar {
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.team-member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-full);
+}
+
+.team-member-role {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  margin-bottom: var(--spacing-xs);
+}
+
+.team-member-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+}
+
+.team-member-bio {
+  color: var(--color-gray-600);
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.team-member-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .team-member-layout {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .team-member-avatar {
+    margin: 0 auto;
+  }
+}

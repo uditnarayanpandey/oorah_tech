@@ -1,0 +1,180 @@
+/* Hero Carousel Container */
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  max-height: 800px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 0.1s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-carousel.loaded {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Carousel Slides */
+.hero-carousel-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  pointer-events: none;
+}
+
+.hero-carousel-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Background Image */
+.hero-carousel-background {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  will-change: opacity;
+}
+
+/* Background Video */
+.hero-carousel-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: opacity;
+}
+
+/* Overlay */
+.hero-carousel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.15) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Content Container */
+.hero-carousel-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: var(--spacing-3xl) 0;
+}
+
+/* Slide Indicators */
+.hero-carousel-indicators {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 3;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+}
+
+.hero-carousel-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.hero-carousel-indicator:hover {
+  background: rgba(255, 255, 255, 0.5);
+  transform: scale(1.2);
+}
+
+.hero-carousel-indicator.active {
+  background: white;
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .hero-carousel-indicator:active {
+    transform: scale(0.9);
+  }
+
+  .hero-carousel {
+    touch-action: pan-y;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-carousel {
+    min-height: 60vh;
+  }
+
+  .hero-carousel-background {
+    background-attachment: scroll;
+  }
+
+  .hero-carousel-indicators {
+    bottom: 20px;
+    gap: 10px;
+    padding: 8px 16px;
+  }
+
+  .hero-carousel-indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  .hero-carousel-content {
+    padding: var(--spacing-2xl) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-carousel {
+    min-height: 50vh;
+  }
+
+  .hero-carousel-indicators {
+    bottom: 15px;
+    gap: 8px;
+    padding: 6px 12px;
+  }
+
+  .hero-carousel-indicator {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Accessibility: Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero-carousel {
+    animation: none;
+    opacity: 1;
+  }
+
+  .hero-carousel-slide {
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .hero-carousel-indicator {
+    transition: none;
+  }
+}
