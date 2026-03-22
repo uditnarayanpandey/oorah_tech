@@ -1,15 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './styles/index.css'
 
 const startApp = async () => {
-  // Initialize MSW for API mocking in development
-  if (import.meta.env.DEV) {
-    const { worker } = await import('./mocks/browser')
-    await worker.start({ onUnhandledRequest: 'bypass' })
-  }
+  const { worker } = await import('./mocks/browser')
+  await worker.start({ onUnhandledRequest: 'bypass' })
 
   const rootElement = document.getElementById('root')
   
@@ -19,9 +16,9 @@ const startApp = async () => {
 
   createRoot(rootElement).render(
     <StrictMode>
-      <HashRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <App />
-      </HashRouter>
+      </BrowserRouter>
     </StrictMode>,
   )
 }
