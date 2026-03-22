@@ -57,6 +57,7 @@
 .about-media {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 /* Left — text */
@@ -111,7 +112,9 @@
 
 /* Video iframe */
 .about-video-frame {
-  width: 100%;
+  width: auto;
+  height: 100%;
+  max-width: 100%;
   aspect-ratio: 9 / 16;
   border: none;
   border-radius: 16px;
