@@ -21,6 +21,7 @@
   height: 50px;
   width: auto;
   display: block;
+  margin-left: -10px;
 }
 
 .footer-description {
