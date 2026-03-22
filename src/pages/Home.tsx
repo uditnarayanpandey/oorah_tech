@@ -66,19 +66,19 @@ const Home = () => {
               <div className="about-thumbnails">
                 <div className="about-thumb" />
                 <div className="about-thumb" />
+                <div className="about-video-box">
+                  <div className="about-video-play">&#9654;</div>
+                  <div>
+                    <p className="about-video-label">Watch Our Story</p>
+                    <p className="about-video-sub">Coming soon</p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Right — photo card + video box */}
+            {/* Right — photo card */}
             <div className="about-photo-card">
               <img src={teamImage} alt="OORAH Team" className="about-photo-img" />
-              <div className="about-video-box">
-                <div className="about-video-play">&#9654;</div>
-                <div>
-                  <p className="about-video-label">Watch Our Story</p>
-                  <p className="about-video-sub">See how we work</p>
-                </div>
-              </div>
             </div>
 
           </div>
