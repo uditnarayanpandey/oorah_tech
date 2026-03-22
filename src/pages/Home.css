@@ -48,23 +48,24 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 3fr 9fr;
+  grid-template-columns: 55fr 45fr;
   gap: 4rem;
   align-items: center;
 }
 
-/* Left — 3 empty tiles */
-.about-images {
+/* Right — team photo */
+.about-photo {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  align-items: flex-end;
+  justify-content: center;
 }
 
-.about-image-tile {
-  flex: 1;
-  min-height: 160px;
-  border-radius: 16px;
-  border: 1px solid #e8e8e8;
+.about-photo img {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
 /* Right — text */
@@ -123,8 +124,12 @@
     gap: 2rem;
   }
 
-  .about-images {
-    height: 352px; /* 2 tiles visible on mobile */
+  .about-photo {
+    order: -1;
+  }
+
+  .about-photo img {
+    max-width: 280px;
   }
 
   .about-heading {
