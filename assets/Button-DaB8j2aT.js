@@ -1,0 +1,1 @@
+import{j as m}from"./index-Bx9i2vKp.js";const e=({variant:t="primary",size:r="md",children:a,className:n="",ariaLabel:s,...o})=>m.jsx("button",{className:`btn btn-${t} btn-${r} ${n}`,"aria-label":s,...o,children:a});export{e as B};
