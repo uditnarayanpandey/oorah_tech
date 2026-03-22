@@ -49,26 +49,30 @@ const Home = () => {
             {/* Right 70% — text */}
             <div className="about-text">
               <h2 className="about-heading">Who We Are</h2>
-              <h3 className="about-subheading">
-                Technology that fits your world — <span>not the other way around.</span>
-              </h3>
+              <p className="about-tagline">Technology that fits your world — not the other way around.</p>
               <p className="about-description">
-                OORAH Tech is a company built on one simple belief: great technology should feel invisible.
-                We design and build tools that integrate directly into your existing ecosystem —
-                no costly overhauls, no steep learning curves, no friction.
-                From emerging startups to established enterprises, we partner with organisations
-                across verticals to solve real problems with focused, elegant solutions.
+                At OORAH Tech, we're built on one simple belief: great technology should feel invisible.
+                We design tools that integrate directly into your existing ecosystem so you can focus
+                on your business, not your software.
               </p>
               <p className="about-description">
-                Innovation at OORAH isn't a buzzword — it's a discipline. Every product we ship
-                is the result of deep listening, rigorous thinking, and an obsession with outcomes
-                that actually matter to your business.
+                We partner with everyone from emerging startups to established enterprises to deliver:
               </p>
-              <p className="about-description">
-                Whether you're navigating a fast-moving market or building the infrastructure for
-                the next decade, OORAH brings the clarity, craft, and conviction to make it happen —
-                quietly, reliably, and without the noise.
-              </p>
+              <ul className="about-list">
+                <li>
+                  <strong>Frictionless Integration</strong> — No costly overhauls or steep learning curves.
+                  Our solutions plug right into what you already use.
+                </li>
+                <li>
+                  <strong>Disciplined Innovation</strong> — Innovation isn't a buzzword here. Every product
+                  we ship comes from deep listening and an obsession with your actual business outcomes.
+                </li>
+                <li>
+                  <strong>Quiet Reliability</strong> — Whether you're navigating a fast-moving market or
+                  building infrastructure for the next decade, we bring the clarity and craft to make it
+                  happen without the noise.
+                </li>
+              </ul>
             </div>
 
           </div>
