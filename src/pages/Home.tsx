@@ -6,16 +6,7 @@ import oonahLogoWhite from '@assets/images/oorah-logo-white.svg'
 import oonahLogoV1 from '@assets/images/oorah-logo-v1.svg'
 import './Home.css'
 
-const ABOUT_IMAGES = [oonahLogo, oonahLogoWhite, oonahLogoV1, oonahLogo, oonahLogoWhite, oonahLogoV1]
-
-const ABOUT_HIGHLIGHTS = [
-  { label: 'Seamless Integration', desc: 'We plug directly into your existing stack — no rip and replace.' },
-  { label: 'Cross-Vertical Reach', desc: 'From healthcare to finance, our tools adapt to any industry.' },
-  { label: 'Innovation First', desc: 'Every product is built with tomorrow\'s challenges in mind.' },
-  { label: 'Client-Centric Design', desc: 'We listen before we build, ensuring every feature earns its place.' },
-  { label: 'Scalable by Nature', desc: 'Grow without friction — our architecture scales with your ambitions.' },
-  { label: 'Trusted Partnership', desc: 'We\'re not just vendors; we\'re long-term partners in your success.' },
-]
+const ABOUT_IMAGES = [oonahLogo, oonahLogoWhite, oonahLogoV1]
 
 const Home = () => {
   return (
@@ -57,7 +48,7 @@ const Home = () => {
             <div className="about-images">
               <div className="about-image-track">
                 {[...ABOUT_IMAGES, ...ABOUT_IMAGES].map((src, i) => (
-                  <div key={i} className={`about-image-tile about-image-tile--${i % 3}`}>
+                  <div key={i} className="about-image-tile">
                     <img src={src} alt="OORAH" />
                   </div>
                 ))}
@@ -82,15 +73,11 @@ const Home = () => {
                 is the result of deep listening, rigorous thinking, and an obsession with outcomes
                 that actually matter to your business.
               </p>
-
-              <div className="about-highlights">
-                {ABOUT_HIGHLIGHTS.map((item) => (
-                  <div key={item.label} className="about-highlight-card">
-                    <h4>{item.label}</h4>
-                    <p>{item.desc}</p>
-                  </div>
-                ))}
-              </div>
+              <p className="about-description">
+                Whether you're navigating a fast-moving market or building the infrastructure for
+                the next decade, OORAH brings the clarity, craft, and conviction to make it happen —
+                quietly, reliably, and without the noise.
+              </p>
             </div>
 
           </div>
