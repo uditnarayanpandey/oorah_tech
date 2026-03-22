@@ -110,15 +110,12 @@
 }
 
 
-/* Video iframe */
-.about-video-frame {
-  width: auto;
-  height: 100%;
-  max-width: 100%;
-  aspect-ratio: 9 / 16;
-  border: none;
+/* Media placeholder */
+.about-media-placeholder {
+  flex: 1;
   border-radius: 16px;
-  display: block;
+  border: 1px solid #e8e8e8;
+  background: #f9f9f9;
 }
 
 

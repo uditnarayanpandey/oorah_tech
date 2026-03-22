@@ -39,15 +39,9 @@ const Home = () => {
         <div className="container">
           <div className="about-grid">
 
-            {/* Left — video */}
+            {/* Left — placeholder */}
             <div className="about-media">
-              <iframe
-                className="about-video-frame"
-                src="https://www.youtube.com/embed/MXG91YFP3O0"
-                title="OORAH Tech — Our Story"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              <div className="about-media-placeholder" />
             </div>
 
             {/* Right — text */}
