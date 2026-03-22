@@ -41,13 +41,13 @@ const Home = () => {
 
             {/* Left — video */}
             <div className="about-media">
-              <div className="about-video-box">
-                <div className="about-video-play">&#9654;</div>
-                <div>
-                  <p className="about-video-label">Watch Our Story</p>
-                  <p className="about-video-sub">Coming soon</p>
-                </div>
-              </div>
+              <iframe
+                className="about-video-frame"
+                src="https://www.youtube.com/embed/MXG91YFP3O0"
+                title="OORAH Tech — Our Story"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
             </div>
 
             {/* Right — text */}
