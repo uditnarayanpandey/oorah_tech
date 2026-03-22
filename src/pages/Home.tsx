@@ -40,7 +40,12 @@ const Home = () => {
         <div className="container">
           <div className="about-grid">
 
-            {/* Left — text */}
+            {/* Left — team photo */}
+            <div className="about-photo">
+              <img src={teamImage} alt="OORAH Team" />
+            </div>
+
+            {/* Right — text */}
             <div className="about-text">
               <h2 className="about-heading">Who We Are</h2>
               <p className="about-tagline">Technology that fits your world — not the other way around.</p>
@@ -67,11 +72,6 @@ const Home = () => {
                   happen without the noise.
                 </li>
               </ul>
-            </div>
-
-            {/* Right — team photo */}
-            <div className="about-photo">
-              <img src={teamImage} alt="OORAH Team" />
             </div>
 
           </div>
