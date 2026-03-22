@@ -40,12 +40,7 @@ const Home = () => {
         <div className="container">
           <div className="about-grid">
 
-            {/* Left — team photo */}
-            <div className="about-photo">
-              <img src={teamImage} alt="OORAH Team" />
-            </div>
-
-            {/* Right — text */}
+            {/* Left — text */}
             <div className="about-text">
               <h2 className="about-heading">Who We Are</h2>
               <p className="about-tagline">Technology that fits your world — not the other way around.</p>
@@ -54,24 +49,36 @@ const Home = () => {
                 We design tools that integrate directly into your existing ecosystem so you can focus
                 on your business, not your software.
               </p>
-              <p className="about-description">
-                We partner with everyone from emerging startups to established enterprises to deliver:
-              </p>
               <ul className="about-list">
                 <li>
                   <strong>Frictionless Integration</strong> — No costly overhauls or steep learning curves.
                   Our solutions plug right into what you already use.
                 </li>
                 <li>
-                  <strong>Disciplined Innovation</strong> — Innovation isn't a buzzword here. Every product
-                  we ship comes from deep listening and an obsession with your actual business outcomes.
+                  <strong>Disciplined Innovation</strong> — Every product we ship comes from deep listening
+                  and an obsession with your actual business outcomes.
                 </li>
                 <li>
-                  <strong>Quiet Reliability</strong> — Whether you're navigating a fast-moving market or
-                  building infrastructure for the next decade, we bring the clarity and craft to make it
-                  happen without the noise.
+                  <strong>Quiet Reliability</strong> — We bring the clarity and craft to make it happen
+                  without the noise.
                 </li>
               </ul>
+              <div className="about-thumbnails">
+                <div className="about-thumb" />
+                <div className="about-thumb" />
+              </div>
+            </div>
+
+            {/* Right — photo card + video box */}
+            <div className="about-photo-card">
+              <img src={teamImage} alt="OORAH Team" className="about-photo-img" />
+              <div className="about-video-box">
+                <div className="about-video-play">&#9654;</div>
+                <div>
+                  <p className="about-video-label">Watch Our Story</p>
+                  <p className="about-video-sub">See how we work</p>
+                </div>
+              </div>
             </div>
 
           </div>
