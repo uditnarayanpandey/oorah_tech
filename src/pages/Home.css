@@ -41,6 +41,152 @@
   color: var(--color-primary);
 }
 
+/* ── About Section ────────────────────────────── */
+.about-section {
+  background: #f9f9fb;
+  overflow: hidden;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: 4rem;
+  align-items: center;
+  min-height: 560px;
+}
+
+/* Left — scrolling image column */
+.about-images {
+  height: 520px;
+  overflow: hidden;
+  border-radius: 24px;
+  position: relative;
+}
+
+.about-image-track {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: scroll-images 18s linear infinite;
+}
+
+.about-images:hover .about-image-track {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-images {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.about-image-tile {
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  flex-shrink: 0;
+}
+
+.about-image-tile--0 { background: linear-gradient(135deg, #1a1a2e, #16213e); height: 180px; }
+.about-image-tile--1 { background: linear-gradient(135deg, #0f3460, #533483); height: 140px; }
+.about-image-tile--2 { background: linear-gradient(135deg, #e94560, #0f3460); height: 160px; }
+
+.about-image-tile img {
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+/* Right — text */
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.about-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-secondary, #e94560);
+}
+
+.about-heading {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #111;
+}
+
+.about-heading span {
+  color: var(--color-secondary, #e94560);
+}
+
+.about-description {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.85;
+}
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.about-highlight-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem;
+  border: 1px solid #ebebeb;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.about-highlight-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.about-highlight-card h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.4rem;
+}
+
+.about-highlight-card p {
+  font-size: 0.8rem;
+  color: #777;
+  line-height: 1.65;
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    min-height: unset;
+  }
+
+  .about-images {
+    height: 240px;
+  }
+
+  .about-heading {
+    font-size: 1.6rem;
+  }
+
+  .about-highlights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* ── Features / Why Choose US ─────────────────── */
 .features {
   background-color: #ffffff;
