@@ -1,12 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Button, HeroCarousel } from '@components'
 import { HERO_SLIDES, HOME_FEATURES } from '@/data/home'
-import oonahLogo from '@assets/images/oorah-logo.svg'
-import oonahLogoWhite from '@assets/images/oorah-logo-white.svg'
-import oonahLogoV1 from '@assets/images/oorah-logo-v1.svg'
 import './Home.css'
-
-const ABOUT_IMAGES = [oonahLogo, oonahLogoWhite, oonahLogoV1]
 
 const Home = () => {
   return (
@@ -44,23 +39,19 @@ const Home = () => {
         <div className="container">
           <div className="about-grid">
 
-            {/* Left 30% — scrolling images */}
+            {/* Left 30% — empty tiles */}
             <div className="about-images">
-              <div className="about-image-track">
-                {[...ABOUT_IMAGES, ...ABOUT_IMAGES].map((src, i) => (
-                  <div key={i} className="about-image-tile">
-                    <img src={src} alt="OORAH" />
-                  </div>
-                ))}
-              </div>
+              <div className="about-image-tile" />
+              <div className="about-image-tile" />
+              <div className="about-image-tile" />
             </div>
 
             {/* Right 70% — text */}
             <div className="about-text">
-              <p className="about-eyebrow">Who We Are</p>
-              <h2 className="about-heading">
+              <h2 className="about-heading">Who We Are</h2>
+              <h3 className="about-subheading">
                 Technology that fits your world — <span>not the other way around.</span>
-              </h2>
+              </h3>
               <p className="about-description">
                 OORAH Tech is a company built on one simple belief: great technology should feel invisible.
                 We design and build tools that integrate directly into your existing ecosystem —
