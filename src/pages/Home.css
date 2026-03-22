@@ -48,7 +48,7 @@
 
 .about-grid {
   display: grid;
-  grid-template-columns: 55fr 45fr;
+  grid-template-columns: 3fr 9fr;
   gap: 4rem;
   align-items: center;
 }
