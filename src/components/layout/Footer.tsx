@@ -11,7 +11,9 @@ const Footer = () => {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <img src={oorahLogoWhite} alt={APP_NAME} className="footer-logo" />
+            <div className="footer-logo-wrap">
+              <img src={oorahLogoWhite} alt={APP_NAME} className="footer-logo" />
+            </div>
             <p className="footer-description">
               Innovative product solutions for a better tomorrow. We deliver excellence across various industries.
             </p>
