@@ -63,7 +63,7 @@
   --transition-slow: 500ms ease;
   
   /* Container */
-  --container-max-width: 1600px;
+  --container-max-width: 1920px;
 }
 
 html {
@@ -106,7 +106,7 @@ ul, ol {
   width: 100%;
   max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--spacing-2xl);
 }
 
 .section {
