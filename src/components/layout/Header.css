@@ -1,5 +1,5 @@
 .header {
-  background-color: var(--color-white);
+  background-color: var(--color-warm);
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
@@ -34,6 +34,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-xl);
+  position: relative;
 }
 
 .nav-link {
@@ -56,6 +57,181 @@
   width: 100%;
   height: 2px;
   background-color: var(--color-secondary);
+}
+
+/* ── Products dropdown ── */
+.nav-item {
+  position: static;
+}
+
+.nav-chevron {
+  display: inline-block;
+  margin-left: 4px;
+  font-style: normal;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--color-gray-400);
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 16px);
+  right: 0;
+  transform: translateY(-6px);
+  width: 460px;
+  display: flex;
+  background-color: var(--color-warm);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+  z-index: 200;
+  overflow: hidden;
+}
+
+.nav-dropdown--open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  right: 24px;
+  transform: rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-gray-100);
+  border-left: 1px solid var(--color-gray-200);
+  border-top: 1px solid var(--color-gray-200);
+  z-index: 1;
+}
+
+/* Left panel — categories */
+.nav-dropdown-categories {
+  width: 200px;
+  flex-shrink: 0;
+  background-color: var(--color-gray-100);
+  padding: var(--spacing-md) var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-dropdown-cat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0.65rem var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-gray-600);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-dropdown-cat:hover {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-900);
+}
+
+.nav-dropdown-cat--active {
+  background-color: var(--color-warm);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.nav-dropdown-cat--active:hover {
+  background-color: var(--color-warm);
+}
+
+
+/* Right panel — products */
+.nav-dropdown-products {
+  flex: 1;
+  padding: var(--spacing-md) var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-dropdown-cat-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-secondary);
+  padding: var(--spacing-xs) var(--spacing-md);
+  margin-bottom: 2px;
+}
+
+.nav-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0.65rem var(--spacing-md);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background-color var(--transition-fast);
+}
+
+.nav-dropdown-item:hover {
+  background-color: var(--color-gray-100);
+}
+
+.nav-dropdown-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-gray-800);
+}
+
+.nav-dropdown-desc {
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  line-height: 1.4;
+}
+
+.nav-dropdown-category {
+  font-size: 0.75rem;
+  color: var(--color-secondary);
+}
+
+/* Mobile accordion — hidden on desktop, shown inside mobile nav */
+.nav-mobile-products {
+  display: none;
+}
+
+.nav-mobile-products-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: none;
+  border: none;
+  padding: var(--spacing-sm) 0;
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  cursor: pointer;
+  width: 100%;
+}
+
+.nav-mobile-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: var(--spacing-md);
+  margin-top: var(--spacing-xs);
 }
 
 .mobile-menu-btn {
@@ -110,13 +286,21 @@
     display: block;
   }
 
+  .nav-dropdown {
+    display: none;
+  }
+
+  .nav-mobile-products {
+    display: block;
+  }
+
   .nav {
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     flex-direction: column;
-    background-color: var(--color-white);
+    background-color: var(--color-warm);
     padding: var(--spacing-lg);
     gap: var(--spacing-lg);
     box-shadow: var(--shadow-md);

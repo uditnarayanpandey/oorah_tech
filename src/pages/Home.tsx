@@ -39,12 +39,7 @@ const Home = () => {
         <div className="container">
           <div className="about-grid">
 
-            {/* Left — placeholder */}
-            <div className="about-media">
-              <div className="about-media-placeholder" />
-            </div>
-
-            {/* Right — text */}
+            {/* Text */}
             <div className="about-text">
               <h2 className="about-heading">Who We Are</h2>
               <p className="about-tagline">Technology that fits your world — not the other way around.</p>
@@ -120,7 +115,7 @@ const Home = () => {
               Join hundreds of companies already using OORAH products to power their success.
             </p>
             <Link to="/contact">
-              <Button variant="secondary" size="lg">
+              <Button variant="outline" size="lg">
                 Get in Touch
               </Button>
             </Link>

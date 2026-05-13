@@ -26,7 +26,7 @@
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 1fr minmax(320px, 400px);
   gap: var(--spacing-3xl);
 }
 

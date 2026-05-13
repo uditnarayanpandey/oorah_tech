@@ -9,28 +9,28 @@
 
 :root {
   /* Brand Colors */
-  --color-primary: #2F4156;         /* Navy */
-  --color-primary-light: #415A77;   /* Muted Navy for hover states */
-  --color-primary-dark: #1B2633;    /* Deep Navy for active states */
-  /* Secondary: The "Calm" Accent */
-  --color-secondary: #567C8D;       /* Teal */
-  --color-secondary-light: #C8D9E6; /* Sky Blue for soft backgrounds */
-  --color-secondary-dark: #3E5965;  /* Darker Teal for secondary buttons */
+  --color-primary: #1A1A1A;         /* Charcoal Black */
+  --color-primary-light: #2D2D2D;   /* Lighter Charcoal for hover states */
+  --color-primary-dark: #0D0D0D;    /* Near Black for active states */
+  /* Secondary: The Accent */
+  --color-secondary: #E17D60;       /* Terracotta */
+  --color-secondary-light: #F2C4B4; /* Soft Terracotta for backgrounds */
+  --color-secondary-dark: #C0614A;  /* Deep Terracotta for hover */
 
-  
+
   /* Neutral Colors */
   --color-white: #ffffff;
-  --color-warm: #F5EFEB;      
-  --color-gray-50: #f7fafc;
-  --color-gray-100: #edf2f7;
-  --color-gray-200: #e2e8f0;
-  --color-gray-300: #cbd5e0;
-  --color-gray-400: #a0aec0;
-  --color-gray-500: #718096;
-  --color-gray-600: #4a5568;
-  --color-gray-700: #2d3748;
-  --color-gray-800: #1a202c;
-  --color-gray-900: #171923;
+  --color-warm: #F8F4F1;
+  --color-gray-50: #F7F4F1;
+  --color-gray-100: #EDE8E3;
+  --color-gray-200: #DDD6CF;
+  --color-gray-300: #C4BAB2;
+  --color-gray-400: #A89D96;
+  --color-gray-500: #7D726C;
+  --color-gray-600: #574F4A;
+  --color-gray-700: #3A3330;
+  --color-gray-800: #211E1C;
+  --color-gray-900: #110F0E;
   
   /* Typography */
   --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -76,7 +76,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--color-gray-800);
-  background-color: var(--color-white);
+  background-color: var(--color-warm);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -120,7 +120,7 @@ ul, ol {
   font-size: 1rem;
   font-weight: 500;
   border-radius: var(--radius-md);
-  border: none;
+  border: 2px solid transparent;
   transition: all var(--transition-fast);
 }
 
@@ -139,7 +139,7 @@ ul, ol {
 }
 
 .btn-secondary:hover {
-  background-color: var(--color-secondary-light);
+  background-color: var(--color-secondary-dark);
 }
 
 .btn-outline {

@@ -1,13 +1,11 @@
-/**
- * API Service Configuration
- * 
- * This file contains the base API configuration and common request methods.
- * Customize the BASE_URL and add authentication headers as needed.
- */
-
-import type { ApiResponse } from '@types'
-
 const DEFAULT_BASE_URL = import.meta.env.VITE_API_URL || '/api'
+
+interface ApiResponse<T> {
+  data: T
+  status: number
+  message?: string
+  error?: string
+}
 
 interface RequestConfig extends RequestInit {
   params?: Record<string, string>
@@ -25,9 +23,9 @@ class ApiService {
     config: RequestConfig = {}
   ): Promise<ApiResponse<T>> {
     const { params, ...requestConfig } = config
-    
+
     let url = `${this.baseUrl}${endpoint}`
-    
+
     if (params) {
       const searchParams = new URLSearchParams(params)
       url += `?${searchParams.toString()}`
@@ -81,7 +79,3 @@ class ApiService {
 }
 
 export const createApi = (baseUrl: string = DEFAULT_BASE_URL) => new ApiService(baseUrl)
-
-export const api = createApi()
-
-export default api

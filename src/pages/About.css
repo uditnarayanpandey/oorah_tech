@@ -21,8 +21,6 @@
 
 /* Story Section */
 .story-content {
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .section-heading {
@@ -116,7 +114,7 @@
 
 /* Meet Our Team Section */
 .team {
-  background-color: var(--color-white);
+  background-color: var(--color-warm);
 }
 
 .team-intro {
