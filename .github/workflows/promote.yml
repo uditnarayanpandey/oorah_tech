@@ -1,0 +1,49 @@
+name: Promote branch
+
+# Opens (or reuses) a PR from dev -> staging, or staging -> main, and
+# turns on auto-merge so it merges itself the moment the required
+# review/approval is satisfied. Requires branch protection on the
+# target branch (require PR + require approvals) and "Allow auto-merge"
+# enabled in repo settings, otherwise this just opens the PR.
+
+on:
+  push:
+    branches: [dev, staging]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  open-promotion-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine target branch
+        id: vars
+        run: |
+          if [ "${{ github.ref_name }}" = "dev" ]; then
+            echo "target=staging" >> "$GITHUB_OUTPUT"
+          else
+            echo "target=main" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open or update promotion PR and enable auto-merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE: ${{ github.ref_name }}
+          TARGET: ${{ steps.vars.outputs.target }}
+        run: |
+          EXISTING=$(gh pr list --base "$TARGET" --head "$SOURCE" --state open --json number --jq '.[0].number')
+
+          if [ -z "$EXISTING" ]; then
+            gh pr create \
+              --base "$TARGET" \
+              --head "$SOURCE" \
+              --title "Promote $SOURCE -> $TARGET" \
+              --body "Automated promotion PR. Merges automatically once required approvals are met."
+            EXISTING=$(gh pr list --base "$TARGET" --head "$SOURCE" --state open --json number --jq '.[0].number')
+          fi
+
+          gh pr merge "$EXISTING" --auto --squash || echo "Auto-merge not enabled yet or PR not mergeable; leaving PR open for manual review."
