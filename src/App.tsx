@@ -1,16 +1,16 @@
-import { lazy, Suspense } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { ErrorBoundary, LoadingSpinner } from '@components'
-import Layout from '@components/layout/Layout'
-import { ROUTES } from '@utils/constants'
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { ErrorBoundary, LoadingSpinner } from '@components';
+import Layout from '@components/layout/Layout';
+import { ROUTES } from '@utils/constants';
 
 // Lazy load pages for better performance
-const Home = lazy(() => import('@pages/Home'))
-const About = lazy(() => import('@pages/About'))
-const Products = lazy(() => import('@pages/Products'))
-const Contact = lazy(() => import('@pages/Contact'))
-const TeamMember = lazy(() => import('@pages/TeamMember'))
-const NotFound = lazy(() => import('@pages/NotFound'))
+const Home = lazy(() => import('@pages/Home'));
+const About = lazy(() => import('@pages/About'));
+const Products = lazy(() => import('@pages/Products'));
+const Contact = lazy(() => import('@pages/Contact'));
+const TeamMember = lazy(() => import('@pages/TeamMember'));
+const NotFound = lazy(() => import('@pages/NotFound'));
 
 function App() {
   return (
@@ -28,7 +28,7 @@ function App() {
         </Routes>
       </Suspense>
     </ErrorBoundary>
-  )
+  );
 }
 
-export default App
+export default App;

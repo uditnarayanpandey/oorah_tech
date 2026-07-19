@@ -99,7 +99,6 @@
   font-weight: 700;
 }
 
-
 @media (max-width: 768px) {
   .about-heading {
     font-size: 1.9rem;
@@ -243,7 +242,11 @@
 }
 
 .cta {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary) 0%,
+    var(--color-secondary-dark) 100%
+  );
   padding: var(--spacing-3xl) 0;
 }
 

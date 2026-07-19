@@ -1,7 +1,7 @@
-import { useState, FormEvent } from 'react'
-import { Button } from '@components'
-import { CONTACT_INFO } from '@utils/constants'
-import './Contact.css'
+import { useState, FormEvent } from 'react';
+import { Button } from '@components';
+import { CONTACT_INFO } from '@utils/constants';
+import './Contact.css';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,20 +9,24 @@ const Contact = () => {
     email: '',
     company: '',
     subject: '',
-    message: ''
-  })
+    message: '',
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // TODO: wire up real form submission (API call / email service)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', company: '', subject: '', message: '' })
-  }
+    alert('Thank you for your message! We will get back to you soon.');
+    setFormData({ name: '', email: '', company: '', subject: '', message: '' });
+  };
 
   return (
     <div className="contact">
@@ -31,7 +35,8 @@ const Contact = () => {
         <div className="container">
           <h1 className="contact-title">Contact Us</h1>
           <p className="contact-subtitle">
-            Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            Have questions? We'd love to hear from you. Send us a message and
+            we'll respond as soon as possible.
           </p>
         </div>
       </section>
@@ -124,7 +129,8 @@ const Contact = () => {
             <div className="contact-info">
               <h2>Get in Touch</h2>
               <p className="contact-intro">
-                We're here to help and answer any question you might have. We look forward to hearing from you.
+                We're here to help and answer any question you might have. We
+                look forward to hearing from you.
               </p>
 
               <div className="contact-details">
@@ -142,7 +148,10 @@ const Contact = () => {
                 <div className="contact-item">
                   <h3>Address</h3>
                   <p>{CONTACT_INFO.ADDRESS.STREET}</p>
-                  <p>{CONTACT_INFO.ADDRESS.CITY}, {CONTACT_INFO.ADDRESS.STATE} {CONTACT_INFO.ADDRESS.ZIP}</p>
+                  <p>
+                    {CONTACT_INFO.ADDRESS.CITY}, {CONTACT_INFO.ADDRESS.STATE}{' '}
+                    {CONTACT_INFO.ADDRESS.ZIP}
+                  </p>
                   <p>{CONTACT_INFO.ADDRESS.COUNTRY}</p>
                 </div>
 
@@ -157,7 +166,7 @@ const Contact = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

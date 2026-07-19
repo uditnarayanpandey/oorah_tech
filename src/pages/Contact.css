@@ -1,6 +1,10 @@
 /* Contact Hero */
 .contact-hero {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
   color: var(--color-white);
   padding: var(--spacing-3xl) 0;
   text-align: center;
@@ -71,7 +75,9 @@
   border-radius: var(--radius-md);
   font-size: 1rem;
   font-family: inherit;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .form-group input:focus,

@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import { Button } from '@components'
-import './NotFound.css'
+import { Link } from 'react-router-dom';
+import { Button } from '@components';
+import './NotFound.css';
 
 const NotFound = () => {
   return (
@@ -20,7 +20,7 @@ const NotFound = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;

@@ -1,13 +1,13 @@
-import { useEffect, useState, useMemo } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Card, Button, LoadingSpinner } from '@components'
-import { ROUTES } from '@utils/constants'
-import type { Product } from '@types'
-import { fetchProducts } from '../services/products'
-import './Products.css'
+import { useEffect, useState, useMemo } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Card, Button, LoadingSpinner } from '@components';
+import { ROUTES } from '@utils/constants';
+import type { Product } from '@types';
+import { fetchProducts } from '../services/products';
+import './Products.css';
 
-const ALL = 'All'
+const ALL = 'All';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 16 },
@@ -16,48 +16,65 @@ const cardVariants = {
     y: 0,
     transition: { duration: 0.28, ease: 'easeOut' as const, delay: i * 0.06 },
   }),
-}
+};
 
 const Products = () => {
-  const [products, setProducts] = useState<Product[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [activeCategory, setActiveCategory] = useState<string>(ALL)
-  const { hash } = useLocation()
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState<string>(ALL);
+  const [retryKey, setRetryKey] = useState(0);
+  const { hash } = useLocation();
 
   const categories = useMemo(
     () => [ALL, ...new Set(products.map((p) => p.category))],
-    [products]
-  )
+    [products],
+  );
 
   const filteredProducts = useMemo(
-    () => activeCategory === ALL ? products : products.filter((p) => p.category === activeCategory),
-    [products, activeCategory]
-  )
+    () =>
+      activeCategory === ALL
+        ? products
+        : products.filter((p) => p.category === activeCategory),
+    [products, activeCategory],
+  );
 
   useEffect(() => {
     if (!isLoading && hash) {
-      const el = document.querySelector(hash)
-      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100)
+      const el = document.querySelector(hash);
+      if (!el) return;
+      const timer = setTimeout(
+        () => el.scrollIntoView({ behavior: 'smooth', block: 'center' }),
+        100,
+      );
+      return () => clearTimeout(timer);
     }
-  }, [isLoading, hash])
+  }, [isLoading, hash]);
 
   useEffect(() => {
-    let isMounted = true
+    let isMounted = true;
+    setIsLoading(true);
+    setError(null);
     const loadProducts = async () => {
       try {
-        const data = await fetchProducts()
-        if (isMounted) setProducts(data)
+        const data = await fetchProducts();
+        if (isMounted) setProducts(data);
       } catch (err) {
         if (isMounted)
-          setError(err instanceof Error ? err.message : 'Unable to load products at the moment.')
+          setError(
+            err instanceof Error
+              ? err.message
+              : 'Unable to load products at the moment.',
+          );
       } finally {
-        if (isMounted) setIsLoading(false)
+        if (isMounted) setIsLoading(false);
       }
-    }
-    loadProducts()
-    return () => { isMounted = false }
-  }, [])
+    };
+    loadProducts();
+    return () => {
+      isMounted = false;
+    };
+  }, [retryKey]);
 
   return (
     <div className="products">
@@ -66,7 +83,8 @@ const Products = () => {
         <div className="container">
           <h1 className="products-title">Our Products</h1>
           <p className="products-subtitle">
-            Discover our range of innovative solutions designed to transform your business.
+            Discover our range of innovative solutions designed to transform
+            your business.
           </p>
         </div>
       </section>
@@ -74,7 +92,6 @@ const Products = () => {
       {/* Products Section */}
       <section className="section products-section">
         <div className="container">
-
           {isLoading && (
             <div className="products-loading">
               <LoadingSpinner size="lg" />
@@ -85,14 +102,23 @@ const Products = () => {
           {error && (
             <div className="products-error">
               <p>{error}</p>
-              <Button variant="outline" onClick={() => window.location.reload()}>Try Again</Button>
+              <Button
+                variant="outline"
+                onClick={() => setRetryKey((k) => k + 1)}
+              >
+                Try Again
+              </Button>
             </div>
           )}
 
           {!isLoading && !error && (
             <>
               {/* Filter tabs */}
-              <div className="products-filter-bar" role="tablist" aria-label="Filter by category">
+              <div
+                className="products-filter-bar"
+                role="tablist"
+                aria-label="Filter by category"
+              >
                 {categories.map((cat) => (
                   <button
                     key={cat}
@@ -104,7 +130,9 @@ const Products = () => {
                   >
                     {cat}
                     <span className="products-filter-count">
-                      {cat === ALL ? products.length : products.filter((p) => p.category === cat).length}
+                      {cat === ALL
+                        ? products.length
+                        : products.filter((p) => p.category === cat).length}
                     </span>
                   </button>
                 ))}
@@ -127,17 +155,25 @@ const Products = () => {
                     >
                       <Card hoverable className="product-card">
                         <Card.Body>
-                          <span className="product-category">{product.category}</span>
+                          <span className="product-category">
+                            {product.category}
+                          </span>
                           <h3 className="product-name">{product.name}</h3>
-                          <p className="product-description">{product.description}</p>
+                          <p className="product-description">
+                            {product.description}
+                          </p>
                           <ul className="product-features">
                             {product.features.map((feature) => (
-                              <li key={`${product.id}-${feature}`}>{feature}</li>
+                              <li key={`${product.id}-${feature}`}>
+                                {feature}
+                              </li>
                             ))}
                           </ul>
                         </Card.Body>
                         <Card.Footer>
-                          <Button variant="primary" size="sm">Learn More</Button>
+                          <Button variant="primary" size="sm">
+                            Learn More
+                          </Button>
                         </Card.Footer>
                       </Card>
                     </motion.div>
@@ -146,7 +182,6 @@ const Products = () => {
               </AnimatePresence>
             </>
           )}
-
         </div>
       </section>
 
@@ -155,15 +190,20 @@ const Products = () => {
         <div className="container">
           <div className="cta-content">
             <h2>Need a Custom Solution?</h2>
-            <p>We can build tailored products to meet your specific business requirements.</p>
+            <p>
+              We can build tailored products to meet your specific business
+              requirements.
+            </p>
             <Link to={ROUTES.CONTACT}>
-              <Button variant="secondary" size="lg">Contact Our Team</Button>
+              <Button variant="secondary" size="lg">
+                Contact Our Team
+              </Button>
             </Link>
           </div>
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

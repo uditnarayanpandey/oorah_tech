@@ -14,7 +14,11 @@
   width: 160px;
   height: 160px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;

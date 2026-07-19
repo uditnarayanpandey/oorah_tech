@@ -1,6 +1,10 @@
 /* ── Hero ── */
 .products-hero {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
   color: var(--color-white);
   padding: var(--spacing-3xl) 0;
   text-align: center;
@@ -84,7 +88,9 @@
   font-weight: 600;
   background-color: var(--color-gray-200);
   color: var(--color-gray-600);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
 }
 
 .products-filter-tab--active .products-filter-count {
@@ -168,7 +174,11 @@
 
 /* ── CTA ── */
 .products-cta {
-  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-secondary) 0%,
+    var(--color-secondary-dark) 100%
+  );
   padding: var(--spacing-3xl) 0;
 }
 

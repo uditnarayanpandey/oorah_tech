@@ -14,48 +14,50 @@ A modern, responsive company website built with React, TypeScript, and Vite.
 
 ```
 OORAH/
-├── public/                 # Static assets
-│   └── oorah-logo.svg     # Logo/favicon
+├── public/                # Static assets (favicon, 404 page)
 ├── src/
-│   ├── assets/            # Images, icons, fonts
+│   ├── assets/            # Images, icons
 │   │   ├── images/
 │   │   └── icons/
 │   ├── components/        # Reusable components
-│   │   ├── layout/        # Layout components (Header, Footer, Layout)
-│   │   ├── ui/            # UI components (Button, Card, etc.)
+│   │   ├── common/        # ErrorBoundary, LoadingSpinner
+│   │   ├── layout/        # Header, Footer, Layout
+│   │   ├── ui/             # Button, Card, HeroCarousel, CoderScene
 │   │   └── index.ts       # Component exports
-│   ├── hooks/             # Custom React hooks
-│   │   ├── useLocalStorage.ts
-│   │   ├── useMediaQuery.ts
-│   │   └── index.ts
-│   ├── pages/             # Page components
+│   ├── data/                # Static content (products, team, home copy)
+│   ├── pages/              # Page components
 │   │   ├── Home.tsx
 │   │   ├── About.tsx
 │   │   ├── Products.tsx
 │   │   ├── Contact.tsx
+│   │   ├── TeamMember.tsx
 │   │   ├── NotFound.tsx
 │   │   └── index.ts
-│   ├── services/          # API services
-│   │   ├── api.ts
-│   │   └── index.ts
+│   ├── services/          # Data-fetching layer (currently reads static data from src/data)
 │   ├── styles/            # Global styles
 │   │   └── index.css
 │   ├── types/             # TypeScript type definitions
 │   │   └── index.ts
 │   ├── utils/             # Utility functions
-│   │   ├── helpers.ts
 │   │   ├── constants.ts
-│   │   └── index.ts
+│   │   └── strings.ts
 │   ├── App.tsx            # Main App component with routes
+│   ├── App.test.tsx       # Routing/rendering smoke tests
 │   ├── main.tsx           # Application entry point
+│   ├── setupTests.ts      # Vitest + Testing Library setup
 │   └── vite-env.d.ts      # Vite type definitions
+├── docs/                  # Extended documentation
+├── .github/workflows/     # CI (lint/test/build) + branch promotion automation
 ├── .gitignore
-├── eslint.config.js       # ESLint configuration
+├── .prettierignore
+├── eslint.config.js       # ESLint configuration (extends Prettier's rule set)
 ├── index.html             # HTML entry point
 ├── package.json           # Dependencies & scripts
+├── prettier.config.js     # Prettier configuration
 ├── tsconfig.json          # TypeScript configuration
 ├── tsconfig.node.json     # TypeScript config for Node
-└── vite.config.ts         # Vite configuration
+├── vercel.json            # Vercel build + SPA routing config
+└── vite.config.ts         # Vite configuration (build + Vitest config)
 ```
 
 ## Getting Started
@@ -92,48 +94,66 @@ pnpm dev
 ### Available Scripts
 
 - `npm run dev` - Start development server
-- `npm run build` - Build for production
+- `npm run build` - Type-check and build for production
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
+- `npm run format` - Format the codebase with Prettier
+- `npm run format:check` - Check formatting without writing changes
+- `npm test` - Run the test suite once (Vitest)
+- `npm run test:watch` - Run the test suite in watch mode
 
 ## Path Aliases
 
-
-## Testing
-
-Jest and React Testing Library are set up for unit and integration tests. See `src/components/ui/Button.test.tsx` for an example.
-
-## State Management
-
-See `src/store/exampleStore.ts` for a simple custom hook. For larger apps, consider Zustand or Redux.
-
-## Environment Variables
-
-Use `.env.example` as a template for your own `.env` file. Vite exposes variables prefixed with `VITE_`.
-
-## Formatting & Linting
-
-Prettier and ESLint are configured for code consistency.
-
-## Documentation
-
-See the `docs/` folder for extended documentation and onboarding guides.
 The project uses path aliases for cleaner imports:
 
 - `@/*` → `src/*`
 - `@components/*` → `src/components/*`
 - `@pages/*` → `src/pages/*`
-- `@hooks/*` → `src/hooks/*`
 - `@utils/*` → `src/utils/*`
 - `@assets/*` → `src/assets/*`
 - `@services/*` → `src/services/*`
 - `@types/*` → `src/types/*`
+
+## Data & Services
+
+Product and team content lives in `src/data/` (`products.ts`, `team.ts`). `src/services/` wraps that data behind async functions (`fetchProducts`, `fetchTeamMembers`, `fetchTeamMemberBySlug`) so pages can keep their existing loading/error/retry UI. There is no backend today — if a real API or CMS is introduced later, only `src/services/` needs to change; pages don't.
+
+## Testing
+
+Vitest + React Testing Library are configured (`vite.config.ts`'s `test` block, `src/setupTests.ts`). Test files live next to the code they cover (`*.test.ts` / `*.test.tsx`). Run with `npm test`.
+
+## Formatting & Linting
+
+Prettier (`prettier.config.js`) and ESLint (`eslint.config.js`, with `eslint-config-prettier` disabling any conflicting stylistic rules) are configured. Run `npm run format` before committing, `npm run lint` to catch issues.
+
+## Environment Variables
+
+Vite exposes variables prefixed with `VITE_`. None are currently required — add a `.env` file if you introduce env-dependent config.
+
+## Documentation
+
+See the `docs/` folder for extended documentation and onboarding guides.
+
+## Branching & Deployment
+
+Three long-lived branches map to three environments, each deployed independently by Vercel:
+
+| Branch    | Environment | Who pushes here                                  |
+| --------- | ----------- | ------------------------------------------------ |
+| `dev`     | Development | Developers push/merge feature work directly      |
+| `staging` | Staging     | Auto-promoted from `dev` via PR, on approval     |
+| `main`    | Production  | Auto-promoted from `staging` via PR, on approval |
+
+Promotion is automated by `.github/workflows/promote.yml`: every push to `dev` or `staging` opens (or reuses) a PR into the next environment and enables auto-merge, so it merges itself as soon as the required review is approved and CI (`.github/workflows/ci.yml`) is green. `staging` and `main` are branch-protected — no direct pushes, PR + approval required. `dev` is left open for direct pushes.
+
+This requires a couple of one-time settings that live outside the repo (GitHub branch protection rules, the "Allow auto-merge" repo setting, and the Vercel project's branch→domain mapping) — see the project's setup notes for the exact steps.
 
 ## Pages
 
 - **Home** (`/`) - Landing page with hero, features, and CTA sections
 - **About** (`/about`) - Company story, stats, values, and mission
 - **Products** (`/products`) - Product catalog with cards
+- **Team member** (`/team/:slug`) - Individual team member profile
 - **Contact** (`/contact`) - Contact form and company information
 - **404** - Not found page
 
@@ -166,7 +186,6 @@ Edit CSS variables in `src/styles/index.css`:
 
 - [ ] Add state management (Zustand/Redux)
 - [ ] Implement dark mode
-- [ ] Add animations (Framer Motion)
 - [ ] Integrate CMS for content
 - [ ] Add blog section
 - [ ] Implement authentication

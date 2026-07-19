@@ -1,22 +1,22 @@
-import { useState, useEffect, ReactNode } from 'react'
-import './HeroCarousel.css'
+import { useState, useEffect, ReactNode } from 'react';
+import './HeroCarousel.css';
 
 export interface HeroSlide {
-  id: string | number
-  type: 'image' | 'video'
-  src: string
-  alt?: string
-  poster?: string // For video thumbnails
+  id: string | number;
+  type: 'image' | 'video';
+  src: string;
+  alt?: string;
+  poster?: string; // For video thumbnails
 }
 
 interface HeroCarouselProps {
-  slides: HeroSlide[]
-  autoPlay?: boolean
-  interval?: number
-  showIndicators?: boolean
-  pauseOnHover?: boolean
-  children?: (slide: HeroSlide, index: number) => ReactNode
-  className?: string
+  slides: HeroSlide[];
+  autoPlay?: boolean;
+  interval?: number;
+  showIndicators?: boolean;
+  pauseOnHover?: boolean;
+  children?: (slide: HeroSlide, index: number) => ReactNode;
+  className?: string;
 }
 
 const HeroCarousel = ({
@@ -28,104 +28,107 @@ const HeroCarousel = ({
   children,
   className = '',
 }: HeroCarouselProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
-  const [contentLoaded, setContentLoaded] = useState(false)
-  const [touchStart, setTouchStart] = useState(0)
-  const [touchEnd, setTouchEnd] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [contentLoaded, setContentLoaded] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
-  const totalSlides = slides.length
-  const isSingleSlide = totalSlides === 1
+  const totalSlides = slides.length;
+  const isSingleSlide = totalSlides === 1;
 
   // Preload content
   useEffect(() => {
     if (isSingleSlide) {
-      setContentLoaded(true)
-      return
+      setContentLoaded(true);
+      return;
     }
 
-    let loadedCount = 0
+    let loadedCount = 0;
     slides.forEach((slide) => {
       if (slide.type === 'image') {
-        const img = new Image()
-        img.src = slide.src
+        const img = new Image();
+        img.src = slide.src;
         img.onload = () => {
-          loadedCount++
+          loadedCount++;
           if (loadedCount === totalSlides) {
-            setContentLoaded(true)
+            setContentLoaded(true);
           }
-        }
+        };
         img.onerror = () => {
-          loadedCount++
+          loadedCount++;
           if (loadedCount === totalSlides) {
-            setContentLoaded(true)
+            setContentLoaded(true);
           }
-        }
+        };
       } else {
         // For videos, just mark as loaded (they'll load progressively)
-        loadedCount++
+        loadedCount++;
         if (loadedCount === totalSlides) {
-          setContentLoaded(true)
+          setContentLoaded(true);
         }
       }
-    })
-  }, [slides, totalSlides, isSingleSlide])
+    });
+  }, [slides, totalSlides, isSingleSlide]);
 
   // Auto-play functionality
   useEffect(() => {
-    if (!autoPlay || isPaused || !contentLoaded || isSingleSlide) return
+    if (!autoPlay || isPaused || !contentLoaded || isSingleSlide) return;
 
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides)
-    }, interval)
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
+    }, interval);
 
-    return () => clearInterval(timer)
-  }, [autoPlay, isPaused, contentLoaded, interval, totalSlides, isSingleSlide])
+    return () => clearInterval(timer);
+  }, [autoPlay, isPaused, contentLoaded, interval, totalSlides, isSingleSlide]);
 
   // Pause when tab is not visible
   useEffect(() => {
-    if (isSingleSlide) return
+    if (isSingleSlide) return;
 
     const handleVisibilityChange = () => {
-      setIsPaused(document.hidden)
-    }
+      setIsPaused(document.hidden);
+    };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange)
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange)
-  }, [isSingleSlide])
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () =>
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [isSingleSlide]);
 
   // Handle touch swipe on mobile
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (isSingleSlide) return
-    setTouchStart(e.targetTouches[0].clientX)
-  }
+    if (isSingleSlide) return;
+    setTouchStart(e.targetTouches[0].clientX);
+  };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    if (isSingleSlide) return
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
+    if (isSingleSlide) return;
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
 
   const handleTouchEnd = () => {
-    if (isSingleSlide || !touchStart || !touchEnd) return
+    if (isSingleSlide || !touchStart || !touchEnd) return;
 
-    const distance = touchStart - touchEnd
-    const minSwipeDistance = 50
+    const distance = touchStart - touchEnd;
+    const minSwipeDistance = 50;
 
     if (distance > minSwipeDistance) {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides)
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
     } else if (distance < -minSwipeDistance) {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + totalSlides) % totalSlides)
+      setCurrentIndex(
+        (prevIndex) => (prevIndex - 1 + totalSlides) % totalSlides,
+      );
     }
 
-    setTouchStart(0)
-    setTouchEnd(0)
-  }
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
 
   const goToSlide = (index: number) => {
-    setCurrentIndex(index)
-  }
+    setCurrentIndex(index);
+  };
 
-  if (totalSlides === 0) return null
+  if (totalSlides === 0) return null;
 
   return (
     <section
@@ -174,7 +177,10 @@ const HeroCarousel = ({
 
       {/* Slide Indicators */}
       {showIndicators && !isSingleSlide && (
-        <div className="hero-carousel-indicators" aria-label="Carousel controls">
+        <div
+          className="hero-carousel-indicators"
+          aria-label="Carousel controls"
+        >
           {slides.map((slide, index) => (
             <button
               key={slide.id}
@@ -188,7 +194,7 @@ const HeroCarousel = ({
         </div>
       )}
     </section>
-  )
-}
+  );
+};
 
-export default HeroCarousel
+export default HeroCarousel;

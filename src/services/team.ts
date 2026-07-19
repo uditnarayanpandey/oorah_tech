@@ -1,17 +1,16 @@
-import type { TeamMember } from '../types'
-import { createApi } from './api'
+import type { TeamMember } from '../types';
+import { teamMembers } from '../data/team';
 
-const TEAM_BASE_URL =
-  import.meta.env.VITE_TEAM_API_URL || import.meta.env.VITE_API_URL || '/api'
+export const fetchTeamMembers = async (): Promise<TeamMember[]> => teamMembers;
 
-const teamApi = createApi(TEAM_BASE_URL)
+export const fetchTeamMemberBySlug = async (
+  slug: string,
+): Promise<TeamMember> => {
+  const member = teamMembers.find((item) => item.slug === slug);
 
-export const fetchTeamMembers = async (): Promise<TeamMember[]> => {
-  const response = await teamApi.get<TeamMember[]>('/team')
-  return response.data
-}
+  if (!member) {
+    throw new Error('Team member not found.');
+  }
 
-export const fetchTeamMemberBySlug = async (slug: string): Promise<TeamMember> => {
-  const response = await teamApi.get<TeamMember>(`/team/${slug}`)
-  return response.data
-}
+  return member;
+};

@@ -1,55 +1,50 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import type { TeamMember as TeamMemberType } from '../types'
-import { fetchTeamMemberBySlug } from '../services/team'
-import './TeamMember.css'
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import type { TeamMember as TeamMemberType } from '../types';
+import { fetchTeamMemberBySlug } from '../services/team';
+import { getInitials } from '../utils/strings';
+import './TeamMember.css';
 
 const TeamMember = () => {
-  const { slug } = useParams()
-  const [member, setMember] = useState<TeamMemberType | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const { slug } = useParams();
+  const [member, setMember] = useState<TeamMemberType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let isMounted = true
+    let isMounted = true;
 
     const loadTeamMember = async () => {
       try {
         if (!slug) {
-          throw new Error('Missing team member identifier.')
+          throw new Error('Missing team member identifier.');
         }
 
-        const data = await fetchTeamMemberBySlug(slug)
+        const data = await fetchTeamMemberBySlug(slug);
         if (isMounted) {
-          setMember(data)
+          setMember(data);
         }
       } catch (err) {
         if (isMounted) {
-          setError(err instanceof Error ? err.message : 'Unable to load team details at the moment.')
+          setError(
+            err instanceof Error
+              ? err.message
+              : 'Unable to load team details at the moment.',
+          );
         }
       } finally {
         if (isMounted) {
-          setIsLoading(false)
+          setIsLoading(false);
         }
       }
-    }
+    };
 
-    loadTeamMember()
+    loadTeamMember();
 
     return () => {
-      isMounted = false
-    }
-  }, [])
-
-  const initials = useMemo(() => {
-    if (!member) return ''
-    return member.name
-      .split(' ')
-      .filter(Boolean)
-      .map((part) => part[0])
-      .slice(0, 2)
-      .join('')
-  }, [member])
+      isMounted = false;
+    };
+  }, [slug]);
 
   if (isLoading) {
     return (
@@ -60,7 +55,7 @@ const TeamMember = () => {
           </div>
         </section>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -76,7 +71,7 @@ const TeamMember = () => {
           </div>
         </section>
       </div>
-    )
+    );
   }
 
   if (!member) {
@@ -92,7 +87,7 @@ const TeamMember = () => {
           </div>
         </section>
       </div>
-    )
+    );
   }
 
   return (
@@ -103,7 +98,7 @@ const TeamMember = () => {
             {member.imageUrl ? (
               <img src={member.imageUrl} alt="" />
             ) : (
-              <span>{initials}</span>
+              <span>{getInitials(member.name)}</span>
             )}
           </div>
           <div>
@@ -117,7 +112,7 @@ const TeamMember = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default TeamMember
+export default TeamMember;
